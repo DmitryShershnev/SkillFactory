@@ -1,0 +1,238 @@
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+   SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+
+   <SOAP-ENV:    Header>
+      ...
+      ...
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      ...
+      ...
+      <SOAP-ENV:Fault>
+         ...
+         ...
+      </SOAP-ENV:Fault>
+      ...
+   </SOAP-ENV:Body>
+</SOAP_ENV:Envelope>
+
+=========================
+В следующем примере показано использование сообщения SOAP в операции HTTP POST
+
+POST /OrderEntry HTTP/1.1
+Host: www.tutorialspoint.com
+Content-Type: application/soap;  charset="utf-8"
+Content-Length: nnnn
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+   SOAP-ENV:encodingStyle = " http://www.w3.org/2001/12/soap-encoding">
+   ...
+   Message information goes here
+   ...
+</SOAP-ENV:Envelope>
+
+==================
+HEADER example
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = " http://www.w3.org/2001/12/soap-envelope"   
+   SOAP-ENV:encodingStyle = " http://www.w3.org/2001/12/soap-encoding">
+
+   <SOAP-ENV:Header>
+      <t:Transaction 
+         xmlns:t = "http://www.tutorialspoint.com/transaction/" 
+         SOAP-ENV:mustUnderstand = "true">5
+      </t:Transaction>
+   </SOAP-ENV:Header>
+   ...
+   ...
+</SOAP-ENV:Envelope>
+
+
+
+==================
+BODY Example
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope>
+   ........
+   <SOAP-ENV:Body>
+      <m:GetQuotation xmlns:m = "http://www.tp.com/Quotation">
+         <m:Item>Computers</m:Item>
+      </m:GetQuotation>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+Ответ на этот запрос
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope>
+   ........
+   <SOAP-ENV:Body>
+      <m:GetQuotationResponse xmlns:m = "http://www.tp.com/Quotation">
+         <m:Quotation>This is Qutation</m:Quotation>
+      </m:GetQuotationResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+==================
+XML example with datatypes
+
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+   
+   <SOAP-ENV:Body>
+      <ns1:getPriceResponse 
+         xmlns:ns1 = "urn:examples:priceservice"  
+         SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+         <return xsi:type = "xsd:double">54.99</return>
+      </ns1:getPriceResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+==================
+
+
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SOAP-ENV:Envelope
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+   <SOAP-ENV:Body>
+      <ns1:getPriceListResponse 
+         xmlns:ns1 = "urn:examples:pricelistservice"  
+         SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+
+         <return xmlns:ns2 = "http://www.w3.org/2001/09/soap-encoding"  
+            xsi:type = "ns2:Array" ns2:arrayType = "xsd:double[2]">
+            <item xsi:type = "xsd:double">54.99</item>
+            <item xsi:type = "xsd:double">19.99</item>
+         </return>
+      </ns1:getPriceListResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+=================
+
+
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+   <SOAP-ENV:Body>
+      <ns1:getProductResponse
+         xmlns:ns1 = "urn:examples:productservice" 
+         SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+		
+         <return xmlns:ns2 = "urn:examples" xsi:type = "ns2:product">
+            <name xsi:type = "xsd:string">Red Hat Linux</name>
+            <price xsi:type = "xsd:double">54.99</price>
+            <description xsi:type = "xsd:string">
+               Red Hat Linux Operating System
+            </description>
+            <SKU xsi:type = "xsd:string">A358185</SKU>
+         </return>
+      </ns1:getProductResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+==============
+POST zapros
+
+POST /Quotation HTTP/1.0
+Host: www.xyz.org
+Content-Type: text/xml; charset = utf-8
+Content-Length: nnn
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope"
+   SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+
+   <SOAP-ENV:Body xmlns:m = "http://www.xyz.org/quotations">
+      <m:GetQuotation>
+         <m:QuotationsName>MiscroSoft</m:QuotationsName>
+      </m:GetQuotation>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+================
+
+Вот пример запроса, отправленного через HTTP в службу перевода XMethods Babelfish:
+
+POST /perl/soaplite.cgi HTTP/1.0
+Host: services.xmethods.com
+Content-Type: text/xml; charset = utf-8
+Content-Length: 538
+SOAPAction: "urn:xmethodsBabelFish#BabelFish"
+
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = "http://schemas.xmlsoap.org/soap/envelope/" 
+   xmlns:xsi = "http://www.w3.org/1999/XMLSchema-instance"
+   xmlns:xsd = "http://www.w3.org/1999/XMLSchema">
+
+   <SOAP-ENV:Body>
+      <ns1:BabelFish
+         xmlns:ns1 = "urn:xmethodsBabelFish"
+         SOAP-ENV:encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/">
+         <translationmode xsi:type = "xsd:string">en_fr</translationmode>
+         <sourcedata xsi:type = "xsd:string">Hello, world!</sourcedata>
+      </ns1:BabelFish>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+================
+Все ли SOAP сообщения WSDL? Нет, это совсем не одно и то же.
+
+
+================
+request
+
+POST /InStock HTTP/1.1 
+Host: www.bookshop.org 
+Content-Type: application/soap+xml; charset=utf-8 
+Content-Length: nnn 
+<?xml version="1.0"?> 
+<soap:Envelope 
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope" 
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding"> 
+<soap:Body xmlns:m="http://www.bookshop.org/prices"> 
+    <m:GetBookPrice> 
+    <m:BookName>The Fleamarket</m:BookName> 
+    </m:GetBookPrice> 
+</soap:Body> 
+</soap:Envelope>
+
+response
+
+POST /InStock HTTP/1.1 
+Host: www.bookshop.org 
+Content-Type: application/soap+xml; charset=utf-8 
+Content-Length: nnn 
+<?xml version="1.0"?> 
+<soap:Envelope 
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope" 
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding"> 
+<soap:Body xmlns:m="http://www.bookshop.org/prices"> 
+    <m:GetBookPriceResponse> 
+    <m: Price>10.95</m: Price> 
+    </m:GetBookPriceResponse> 
+</soap:Body> 
+</soap:Envelope> 
+
+
+
+
+

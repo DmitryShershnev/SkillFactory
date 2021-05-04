@@ -1,0 +1,88 @@
+<Order>
+  <ClientID>45     </ClientID>
+  <Address>Москва Новгородская ул д 1</Address>
+  <RequestedDeliveryTime>2002-05-30T09:00:00</RequestedDeliveryTime>    
+  <PizzaLines>
+     <PizzaLine>
+        <LineNumber>1</LineNumber>
+        <PizzaID>2</PizzaID>
+        <Quantity>2<Quantity>
+        <IngredientLines>
+           <IngredientLine>
+		<LineNumber>1</LineNumber>
+                <IngredientID>5</IngredientID>
+                <Quantity>1</Quantity>
+           </IngredientLine>
+           <IngredientLine>
+		<LineNumber>2</LineNumber>
+                <IngredientID>6</IngredientID>
+                <Quantity>2</Quantity>
+           </IngredientLine> 
+        </IngredientLines>
+     </PizzaLine>
+     <PizzaLine>
+        <LineNumber>2</LineNumber>
+        <PizzaID>3</PizzaID>
+        <Quantity>2<Quantity>
+        <IngredientLines>
+           <IngredientLine>
+		<LineNumber>1</LineNumber>
+                <IngredientID>7</IngredientID>
+                <Quantity>1</Quantity>
+           </IngredientLine>
+           <IngredientLine>
+		<LineNumber>2</LineNumber>
+                <IngredientID>8</IngredientID>
+                <Quantity>1</Quantity>
+           </IngredientLine> 
+        </IngredientLines>
+     </PizzaLine>
+  <PizzaLines>
+</Order>
+
+
+
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:int" name="ClientID"/>
+        <xs:element type="xs:string" name="Address"/>
+        <xs:element type="xs:dateTime" name="RequestedDeliveryTime"/>
+        <xs:element name="PizzaLines">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PizzaLine" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:int" name="LineNumber"/>
+                    <xs:element type="xs:int" name="PizzaID"/>
+                    <xs:element type="xs:int" name="Quantity"/>
+                    <xs:element name="IngredientLines">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="IngredientLine" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:int" name="LineNumber"/>
+                                <xs:element type="xs:int" name="IngredientID"/>
+                                <xs:element type="xs:int" name="Quantity"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+
